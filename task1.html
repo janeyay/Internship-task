@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Draggable Slider</title>
+    <link rel="stylesheet" href="/styles.css">
+</head>
+<body>
+    <div class="slider-container">
+        <div class="sliderr" id="slider">
+            <div class="card">
+                <div class="upper">
+              </div>
+              <div class="lower">
+                <div class="left">
+                </div>
+                <div class="right">
+                  <div class="r1"></div>
+                  <div class="r2"></div>
+                </div>
+              </div></div>
+            <div class="card"><div class="upper">
+            </div>
+            <div class="lower">
+              <div class="left">
+              </div>
+              <div class="right">
+                <div class="r1"></div>
+                  <div class="r2"></div>
+              </div>
+            </div></div>
+            <div class="card"><div class="upper">
+            </div>
+            <div class="lower">
+              <div class="left">
+              </div>
+              <div class="right">
+                <div class="r1"></div>
+                  <div class="r2"></div>
+              </div>
+            </div></div>
+            <div class="card"><div class="upper">
+            </div>
+            <div class="lower">
+              <div class="left">
+              </div>
+              <div class="right">
+                <div class="r1"></div>
+                  <div class="r2"></div>
+              </div>
+            </div></div>
+            <div class="card"><div class="upper">
+            </div>
+            <div class="lower">
+              <div class="left">
+              </div>
+              <div class="right">
+                <div class="r1"></div>
+                  <div class="r2"></div>
+              </div>
+            </div></div>
+            
+            
+            
+        </div>
+    </div>
+    <script>
+        // slider
+    function upscroll(){
+    let lists = document.querySelectorAll('.card'); 
+     document.getElementById('slider').appendChild(lists[0]);    
+    }
+    function downscroll(){
+    let lists = document.querySelectorAll('.card');
+    document.getElementById('slider').prepend(lists[lists.length - 1]);
+    };
+    
+    let container = document.querySelector(".slider-container");
+    let innerContainer = document.querySelector(".inner-container");
+
+    let isDragging = false;
+    let startY;
+    let endY;
+ 
+// Event listeners
+    container.addEventListener("mousedown", (e) => {
+        isDragging = true;
+        startY = e.offsetY; // Record the initial Y position
+        container.style.cursor = "grabbing";
+    });
+
+    container.addEventListener("mouseup", (e) => {
+        if (!isDragging) return;
+
+        isDragging = false;
+        container.style.cursor = "grab";
+        endY = e.offsetY; // Record the final Y position
+
+    // Determine direction and call appropriate function
+    if (endY < startY) {
+        upscroll(); // Moved up
+    } else if (endY > startY) {
+        downscroll(); // Moved down
+    }
+    });
+
+    container.addEventListener("mousemove", (e) => {
+    if (!isDragging) return;
+    e.preventDefault();
+
+    let currentY = e.offsetY;
+     innerContainer.style.top = '${currentY - startY} px';
+    });
+
+
+    
+    </script>
+</body>
+</html>         
